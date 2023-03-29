@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return NewMyApp();
+    return const MaterialApp(home: NewMyApp());
   }
 }
 
@@ -26,36 +26,34 @@ class NewMyApp extends StatefulWidget {
 class _NewMyAppState extends State<NewMyApp> {
   @override
   Widget build(BuildContext cntx) {
-    return MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    cntx,
-                    MaterialPageRoute(
-                      builder: (cntx) => const FlutterDemoPage(),
-                    ),
-                  );
-                },
-                child: const Text('normal test'),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.push(cntx, MaterialPageRoute(
-                    builder: (cntx) {
-                      return const WeatherCard(
-                          temp: 66, weather: Weather.sunny);
-                    },
-                  ));
-                },
-                child: const Text('Weather Test'),
-              )
-            ],
-          ),
+    return Scaffold(
+      appBar: AppBar(title: const Text('Goldent flutter test')),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  cntx,
+                  MaterialPageRoute(
+                    builder: (cntx) => const FlutterDemoPage(),
+                  ),
+                );
+              },
+              child: const Text('normal test'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(cntx, MaterialPageRoute(
+                  builder: (cntx) {
+                    return const WeatherCard(temp: 66, weather: Weather.sunny);
+                  },
+                ));
+              },
+              child: const Text('Weather Test'),
+            )
+          ],
         ),
       ),
     );

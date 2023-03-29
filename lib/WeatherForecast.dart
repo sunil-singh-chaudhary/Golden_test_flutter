@@ -10,61 +10,69 @@ class WeatherForecast extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return Container(
-      decoration: const BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          colors: [Colors.lightBlue, Colors.deepPurple],
-          end: Alignment.bottomCenter,
-        ),
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          const Spacer(),
-          Column(
-            children: [
-              const SizedBox(height: 48),
-              Text(
-                'Today\'s Forecast',
-                style: theme.textTheme.bodyMedium,
-              ),
-              Container(
-                constraints: const BoxConstraints(minWidth: 100, maxWidth: 300),
-                child: Theme(
-                  data: theme.copyWith(
-                    cardTheme: theme.cardTheme.copyWith(
-                      color: Colors.black26,
-                      shape: const CircleBorder(),
-                    ),
-                    textTheme: theme.textTheme.copyWith(
-                      bodyMedium:
-                          theme.textTheme.bodyMedium!.copyWith(fontSize: 24),
-                    ),
-                  ),
-                  child: WeatherCard.forecast(today),
-                ),
-              ),
-              const SizedBox(height: 8),
-              Text(today.description),
-            ],
+    return Directionality(
+      textDirection: TextDirection.ltr,
+      child: Scaffold(
+        body: Container(
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              colors: [Colors.lightBlue, Colors.deepPurple],
+              end: Alignment.bottomCenter,
+            ),
           ),
-          const Spacer(),
-          Column(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text('This Week\'s Forecast',
-                  style: Theme.of(context).textTheme.bodyMedium),
-              if (MediaQuery.of(context).size.width > 400 &&
-                  MediaQuery.of(context).size.height > 600)
-                WeeklyForecastExpanded(forecasts: _list)
-              else
-                WeeklyForecastCompact(forecasts: _list),
+              const Spacer(),
+              Column(
+                children: [
+                  const SizedBox(height: 48),
+                  Text(
+                    'Today\'s Forecast',
+                    style: theme.textTheme.bodyMedium,
+                  ),
+                  Container(
+                    constraints:
+                        const BoxConstraints(minWidth: 100, maxWidth: 300),
+                    child: Theme(
+                      data: theme.copyWith(
+                        cardTheme: theme.cardTheme.copyWith(
+                          color: Colors.black26,
+                          shape: const CircleBorder(),
+                        ),
+                        textTheme: theme.textTheme.copyWith(
+                          bodyMedium: theme.textTheme.bodyMedium!
+                              .copyWith(fontSize: 24),
+                        ),
+                      ),
+                      child: WeatherCard.forecast(today),
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(today.description),
+                ],
+              ),
+              const Spacer(),
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text('This Week\'s Forecast',
+                      style: Theme.of(context).textTheme.bodyMedium),
+                  if (MediaQuery.of(context).size.width > 400 &&
+                      MediaQuery.of(context).size.height > 600)
+                    WeeklyForecastExpanded(forecasts: _list)
+                  else
+                    WeeklyForecastCompact(forecasts: _list),
+                ],
+              ),
+              const SizedBox(height: 24),
             ],
           ),
-          const SizedBox(height: 24),
-        ],
+        ),
       ),
     );
   }

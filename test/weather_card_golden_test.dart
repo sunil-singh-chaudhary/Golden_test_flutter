@@ -10,6 +10,7 @@ void main() {
     /// It simply pumps a custom widget and captures the golden
 
     testGoldens('single wheather card look good', (tester) async {
+      await loadAppFonts();
       await tester.pumpWidgetBuilder(
         const Center(
           child: WeatherCard(temp: 66, weather: Weather.sunny),
@@ -25,6 +26,7 @@ void main() {
   group('GoldenBuilder', () {
     /// lays out the results in a grid
     testGoldens('Multiple test scenerio on wheather card', (tester) async {
+      await loadAppFonts();
       final gb = GoldenBuilder.grid(
         columns: 2,
         bgColor: Colors.white,
@@ -59,6 +61,7 @@ void main() {
   /// if are showing anything in column then use this below
   testGoldens('COLUMN: Different weather types with extra frame',
       (tester) async {
+    await loadAppFonts();
     final gb = GoldenBuilder.column(
       bgColor: Colors.white,
       wrap: _simpleFrame,
@@ -79,6 +82,7 @@ void main() {
   /// test with multiple dimensions of parameters
   testGoldens('Card should look right on different devices / screen sizes',
       (tester) async {
+    await loadAppFonts();
     final gb = GoldenBuilder.column(bgColor: Colors.white)
       ..addScenario(
           'Sunny', const WeatherCard(temp: 66, weather: Weather.sunny))
@@ -112,6 +116,7 @@ void main() {
     // With those test we want to make sure our widgets look right when user changes system font size
     testGoldens('Card should look right when user bumps system font size',
         (tester) async {
+      await loadAppFonts();
       const widget = WeatherCard(temp: 56, weather: Weather.cloudy);
 
       final gb = GoldenBuilder.column(bgColor: Colors.white, wrap: _simpleFrame)
